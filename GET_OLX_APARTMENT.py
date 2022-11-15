@@ -29,13 +29,13 @@ def webscrapOLX(miasto, dzielnica = 'NULL'):
             nazwa.append(data.find('h6').text)
 
             cena_temp = data.find('p').text
-            cena_temp = cena_temp.replace(' ','',).replace('zł','').replace("donegocjacji","")
-            cena.append(cena_temp)
+            cena_temp = cena_temp.replace(' ','',).replace('zł','').replace("donegocjacji","").replace(',',".")
+            cena.append(float(cena_temp))
 
             metraz_temp = data.find('div', attrs={"color": "text-global-secondary"}).text
             metraz_temp = metraz_temp.split()
-            metraz.append(metraz_temp[0].replace(',',".").replace('""',''))
-            cena_za_metr.append(metraz_temp[3])
+            metraz.append(float(metraz_temp[0].replace(',',".").replace('""','')))
+            cena_za_metr.append(float(metraz_temp[3]))
 
             miasta.append(miasto)
             dzielnice.append(dzielnica)
